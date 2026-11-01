@@ -1,0 +1,7 @@
+{
+  "age": 30,
+  "ingredients": [
+    {"food_id": "fndds-2021-2023:63101000", "portion": {"value": 300, "unit": "g"}, "source": "user_confirmed"}
+  ],
+  "final_edible_grams": 280
+}

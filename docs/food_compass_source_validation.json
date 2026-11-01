@@ -1,0 +1,8 @@
+{
+  "source": "Barrett et al. 2024 Supplementary Table S5",
+  "source_url": "https://doi.org/10.1038/s43016-024-01053-3",
+  "pdf_sha256": "26af914baa2662fe65e17b607c5a629baa01a043016d21cdab7bd3c03fc3eab4",
+  "extracted_rows": 9273,
+  "csv_exactly_matches_fresh_pdf_extraction": true,
+  "unique_food_codes": 9251
+}

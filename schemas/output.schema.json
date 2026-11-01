@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Diet assessment response",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "status": {
+      "enum": [
+        "complete",
+        "partial",
+        "needs_clarification",
+        "error"
+      ]
+    },
+    "error": {
+      "type": "string"
+    },
+    "foods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "fdc_id",
+          "food_code",
+          "edible_grams",
+          "nutrients",
+          "food_patterns",
+          "food_compass"
+        ]
+      }
+    },
+    "unresolved": {
+      "type": "array"
+    },
+    "totals": {
+      "type": "object"
+    },
+    "indices": {
+      "type": "object"
+    },
+    "dataset_releases": {
+      "type": "array"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "uncertainty": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}

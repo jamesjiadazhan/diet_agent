@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "diet-agent"
+version = "0.1.0"
+description = "Local, provenance-aware dietary assessment for AI agents"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "James Jiada Zhan"}]
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/jamesjiadazhan/diet_agent"
+
+[project.scripts]
+diet-assess = "diet_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+diet_agent = ["asset_manifest.json", "fooddb/schema.sql"]

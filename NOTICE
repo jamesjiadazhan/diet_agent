@@ -1,0 +1,30 @@
+Code: MIT, Copyright (c) 2026 James Jiada Zhan.
+
+HEI algorithms and validation fixtures adapted from dietaryindex 2.1,
+James Jiada Zhan and Rebecca A. Hodge, Git commit
+0cb60bd67c2942d954d20637500c4a921a935f51.
+The original license is preserved in reference/dietaryindex/LICENSE.txt.
+
+Citation: Zhan JJ, Hodge RA, Dunlop AL, et al. Dietaryindex: a user-friendly
+and versatile R package for standardizing dietary pattern analysis in
+epidemiological and clinical studies. Am J Clin Nutr. 2024.
+doi:10.1016/j.ajcnut.2024.08.021.
+https://github.com/jamesjiadazhan/dietaryindex
+
+Food Compass published table: Barrett EM, Shi P, Blumberg JB, et al.
+Food Compass 2.0 is an improved nutrient profiling system to characterize
+healthfulness of foods and beverages. Nature Food 5, 911-915 (2024).
+https://doi.org/10.1038/s43016-024-01053-3
+CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+The table is extracted to CSV and conservatively crosswalked; unmatched
+or ambiguous rows are excluded from verified lookup. No endorsement implied.
+
+USDA FNDDS 2021-2023 nutrient and portion data: USDA Agricultural Research
+Service, Food Surveys Research Group, October 2024 release.
+https://fdc.nal.usda.gov/download-datasets/
+USDA FPED/FPID 2021-2023, when present: USDA ARS, 2026.
+https://www.ars.usda.gov/northeast-area/beltsville-md-bhnrc/beltsville-human-nutrition-research-center/food-surveys-research-group/docs/fped-doc-and-datasets/
+
+Code licensing does not replace upstream data attribution or third-party
+licenses. Legacy app precomputed values are separately labeled unvalidated
+and are not represented as official published or validated reconstructed scores.

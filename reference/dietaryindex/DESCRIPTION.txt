@@ -1,0 +1,48 @@
+Package: dietaryindex
+Type: Package
+Title: dietary index
+Version: 2.1
+Authors@R: c( person("James", "Zhan", , "jzha832@emory.edu", role =
+        c("aut", "cre"), comment = c(ORCID = "0000-0003-2480-8760") ),
+        person("Becky", "Hodge", role = "aut", comment = c(ORCID =
+        "0000-0002-9738-0876") ) )
+Maintainer: James Jiada Zhan <jzha832@emory.edu>
+Date: 2025-11-02
+URL: https://jamesjiadazhan.github.io/dietaryindex_manual
+Description: Currently, the package works for the following 5 dietary
+        assessment tools to calculate many dietary indexes within 1
+        steps without data-preprocessing.  1. It can calculate DI-GM,
+        DII, PHDI, HEI2020, HEI2015, AHEI, DASH, DASHI, MED, MEDI for
+        the NHANES.  2. It can calculate HEI2020, HEI2015, AHEI, DASH,
+        MED, and DII for the ASA24.  3. It can calculate HEI2015, AHEI,
+        DASH, and MED for the DHQ3.  4. It can calculate HEI2015, AHEI,
+        AHEIP, DASH, MED, and DII for the Block FFQ.  This package can
+        also help you calculate all of these dietary indexes using all
+        other dietary assessments, if you provide the relevant serving
+        sizes for each food/nutrient category.  Outputs include the
+        dietary index total score and component scores (for
+        dataset-specific functions).
+Depends: R (>= 3.5)
+Imports: dplyr, readr, haven
+License: MIT License
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: dietaryindex
+RemoteUsername: jamesjiadazhan
+RemoteRef: HEAD
+RemoteSha: 0cb60bd67c2942d954d20637500c4a921a935f51
+GithubRepo: dietaryindex
+GithubUsername: jamesjiadazhan
+GithubRef: HEAD
+GithubSHA1: 0cb60bd67c2942d954d20637500c4a921a935f51
+NeedsCompilation: no
+Packaged: 2026-11-01 21:41:42 UTC; james
+Author: James Zhan [aut, cre]
+        (<https://orcid.org/0000-0003-2480-8760>), Becky Hodge [aut]
+        (<https://orcid.org/0000-0002-9738-0876>)
+Built: R 4.3.2; ; 2026-11-01 21:41:44 UTC; unix
+
+-- File: /Users/james/Library/R/arm64/4.3/library/dietaryindex/Meta/package.rds 

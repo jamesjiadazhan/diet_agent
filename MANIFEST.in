@@ -1,0 +1,10 @@
+include LICENSE README.md CODEX_IMPLEMENTATION.md
+recursive-include docs *.md *.json
+recursive-include reference *.R *.txt CITATION
+recursive-include scripts *.py *.R
+recursive-include tests *.py *.csv
+recursive-include schemas *.json
+recursive-include examples *.json
+include data/manifest.json
+exclude data/*.sqlite data/*.sqlite.gz
+prune data_sources

@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jamesjiadazhan/diet_agent/schemas/input.schema.json",
+  "title": "Diet assessment request",
+  "type": "object",
+  "properties": {
+    "foods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "food_id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "preparation": {
+            "type": "string"
+          },
+          "source": {
+            "enum": [
+              "photo_estimate",
+              "user_text",
+              "label",
+              "database_measure",
+              "user_confirmed"
+            ]
+          },
+          "uncertainty": {
+            "type": [
+              "string",
+              "object",
+              "null"
+            ]
+          },
+          "portion": {
+            "type": "object",
+            "required": [
+              "value",
+              "unit"
+            ],
+            "properties": {
+              "value": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "unit": {
+                "enum": [
+                  "g",
+                  "kg",
+                  "mg",
+                  "measure"
+                ]
+              },
+              "min": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "max": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "measure_id": {
+                "type": "integer"
+              },
+              "basis": {
+                "const": "edible"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "portion"
+        ],
+        "anyOf": [
+          {
+            "required": [
+              "food_id"
+            ]
+          },
+          {
+            "required": [
+              "description"
+            ]
+          }
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "age": {
+      "type": "number",
+      "minimum": 1
+    },
+    "requested_outputs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "nutrients",
+          "food_patterns",
+          "hei2020",
+          "food_compass"
+        ]
+      }
+    }
+  },
+  "required": [
+    "foods"
+  ],
+  "additionalProperties": false
+}

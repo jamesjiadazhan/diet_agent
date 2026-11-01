@@ -1,0 +1,12 @@
+{
+  "age": 30,
+  "foods": [
+    {
+      "food_id": "fndds-2021-2023:63101000",
+      "description": "Apple, raw",
+      "preparation": "raw",
+      "portion": {"value": 182, "unit": "g", "min": 170, "max": 190},
+      "source": "user_text"
+    }
+  ]
+}

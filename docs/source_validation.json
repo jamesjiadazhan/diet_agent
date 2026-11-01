@@ -1,0 +1,15 @@
+{
+  "asset_checksums": "ok",
+  "blockers": [
+    "Matching FPED/FPID 2021-2023 source files unavailable; HEI from catalog intakes abstains"
+  ],
+  "catalog_foods": 5431,
+  "foreign_keys": "ok",
+  "integrity": "ok",
+  "pattern_source_status": "partial",
+  "precomputed_reference_values": 5431,
+  "published_scores_exactly_verified": 3575,
+  "source_nutrients_exactly_equal": 353015,
+  "source_pattern_values_exactly_equal": 0,
+  "source_portions_exactly_equal": 22191
+}

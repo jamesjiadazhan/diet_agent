@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Please cite dietaryindex and the underlying USDA and Food Compass sources described in NOTICE."
+title: "Dietary Assessment for AI Agents"
+type: software
+version: 0.1.0
+authors:
+  - family-names: Zhan
+    given-names: James Jiada
+repository-code: https://github.com/jamesjiadazhan/diet_agent
+license: MIT
