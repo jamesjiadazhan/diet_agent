@@ -10,7 +10,7 @@ human-milk record with no nutrient profile; that record is explicitly excluded
 and listed in `data/manifest.json`. FDC IDs, eight-digit FNDDS food codes and
 internal IDs are separate fields, never interchangeable.
 
-The checked-in asset is `data/generic-fndds-2021-2023-v1.sqlite.gz`. Its SHA-256,
+The checked-in asset is `data/generic-fndds-2021-2023-v2.sqlite.gz`. Its SHA-256,
 decompressed checksum, byte sizes, source checksums and dataset versions are in
 `data/manifest.json`. `diet-assess data install` verifies both checksums before
 an atomic installation. Runtime wheels include only a small manifest, not the
@@ -52,13 +52,17 @@ abstains for such cases rather than guessing. Source tables live in
 
 The importer accepts **FPED and FPID 2021–2023 only**. It does not import the
 app's FPED 2017–March 2020 crosswalk. The source workbook headers retain units
-and exact food-code joins are used. The current build status and any absent
-source files are explicitly recorded in `data/manifest.json`.
+and exact food-code joins are used. All 5,431 catalog foods match FPED, providing 200,947 reported pattern
+values. FPID adds 1,720 ingredients and 63,640 ingredient-pattern values. Both
+official workbook checksums are pinned in `data/manifest.json`.
 
-If the matching files have not been downloaded, the partial catalog contains
-no pattern equivalents; a meal assessment returns `partial` and no HEI score.
-The separately validated HEI functions remain usable with complete externally
-supplied inputs. Missing patterns are never represented as zero.
+Meal and daily assessment now compute HEI from the matched equivalents and
+USDA nutrient totals. Missing values are never represented as zero. A future
+partial build remains explicitly marked partial. Known-zero saturated fat uses
+the original R NHANES ratio convention of zero; zero total energy abstains.
+
+The superseded partial v1 asset remains unchanged. The complete v2 asset is the
+default for package 0.1.1 and later; the installer does not overwrite old caches.
 
 Official sources:
 
@@ -68,15 +72,16 @@ Official sources:
 
 ## Rebuild
 
-Acquire the pinned USDA source files. Checksums of the inputs used for the
-current asset are in the manifest. Preserve upstream files unchanged.
+Acquire the pinned USDA FNDDS JSON. Run `python scripts/fetch_pattern_sources.py`
+to download and verify the two official FPED/FPID workbooks. Checksums of the inputs
+used for the current asset are in the manifest. Preserve upstream files unchanged.
 
 ```sh
 python scripts/build_fooddb.py \
   --fndds /path/to/FNDDS_10_2024.json \
   --fped data_sources/FPED_2123.xls \
   --fpid data_sources/FPID_2123.xls \
-  --output /path/to/new/generic-fndds-2021-2023-v1.sqlite
+  --output /path/to/new/generic-fndds-2021-2023-v2.sqlite
 ```
 
 Build-time workbook conversion uses R and `readxl`; runtime does not. The builder

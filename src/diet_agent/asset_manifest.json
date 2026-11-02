@@ -1,13 +1,11 @@
 {
-  "blockers": [
-    "Matching FPED/FPID 2021-2023 source files unavailable; HEI from catalog intakes abstains"
-  ],
-  "bytes": 3810206,
+  "blockers": [],
+  "bytes": 5452060,
   "compass_methods": {
     "published_exact": 3575,
     "unavailable": 1856
   },
-  "dataset_version": "generic-fndds-2021-2023-v1",
+  "dataset_version": "generic-fndds-2021-2023-v2",
   "excluded_source_records": [
     {
       "description": "Milk, human",
@@ -16,13 +14,13 @@
       "reason": "not in original generic catalog; no precomputed score"
     }
   ],
-  "file": "generic-fndds-2021-2023-v1.sqlite.gz",
+  "file": "generic-fndds-2021-2023-v2.sqlite.gz",
   "foods": 5431,
-  "fped_matched_foods": 0,
-  "fpid_ingredients": 0,
+  "fped_matched_foods": 5431,
+  "fpid_ingredients": 1720,
   "precomputed_reference_coverage": 5431,
   "schema_version": 1,
-  "sha256": "dc31ce29f253f117cebaa1ff783e6371b4584e62206c22611dce153587d980fb",
+  "sha256": "f7b89cbd6293c15116ad4d78921096b43c1aa3dc25f6947079c2fabe54a22b5d",
   "sources": [
     {
       "file": "FNDDS_10_2024.json",
@@ -41,10 +39,22 @@
       "id": "legacy-app-compass",
       "sha256": "a399e78896014760fb52bc08f70040484cfab745f22419980b7478266b51289b",
       "url": "https://github.com/jamesjiadazhan/diet_agent"
+    },
+    {
+      "file": "FPED_2123.xls",
+      "id": "fped-2021-2023",
+      "sha256": "8c198ae382b2382f07012caaddccfc1ac6990d7200bf72320f16dbe3aa3ac170",
+      "url": "https://www.ars.usda.gov/ARSUserFiles/80400530/apps/FPED_2123.xls"
+    },
+    {
+      "file": "FPID_2123.xls",
+      "id": "fpid-2021-2023",
+      "sha256": "252f46e90a42359b993b87ab59b78b89a1c732de81df7cbb8e82cc20765254fe",
+      "url": "https://www.ars.usda.gov/ARSUserFiles/80400530/apps/FPID_2123.xls"
     }
   ],
-  "status": "partial",
-  "uncompressed_bytes": 31764480,
-  "uncompressed_sha256": "5d43305ed183c35d93d30c1d37fb649a19a224b586619a97c35e325c121b24fa",
-  "url": "https://raw.githubusercontent.com/jamesjiadazhan/diet_agent/main/data/generic-fndds-2021-2023-v1.sqlite.gz"
+  "status": "complete",
+  "uncompressed_bytes": 49315840,
+  "uncompressed_sha256": "97a944f4cc2d3104948a4bd509e600581785d3c331150506b6793d543faeca69",
+  "url": "https://raw.githubusercontent.com/jamesjiadazhan/diet_agent/main/data/generic-fndds-2021-2023-v2.sqlite.gz"
 }

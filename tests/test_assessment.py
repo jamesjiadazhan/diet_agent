@@ -1,6 +1,7 @@
 from contextlib import redirect_stderr,redirect_stdout
 import io
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -14,7 +15,7 @@ from diet_agent.fooddb import FoodDatabase
 from diet_agent.mcp_server import call_tool,serve,tool_definitions
 
 ROOT=Path(__file__).resolve().parents[1]
-DB=ROOT/'data/generic-fndds-2021-2023-v1.sqlite'
+DB=ROOT/'data'/manifest()['file'].removesuffix('.gz')
 
 
 class AssessmentTests(unittest.TestCase):
@@ -132,7 +133,7 @@ class AssessmentTests(unittest.TestCase):
         self.assertEqual(len(messages),4)
         self.assertEqual(messages[2]['result']['structuredContent'],direct)
         self.assertTrue(messages[3]['result']['isError'])
-        process=subprocess.run([sys.executable,'-m','diet_agent.cli','mcp','--database',str(DB)],input='\n'.join(json.dumps(x) for x in requests)+'\n',text=True,capture_output=True,check=True)
+        process=subprocess.run([sys.executable,'-m','diet_agent.cli','mcp','--database',str(DB)],input='\n'.join(json.dumps(x) for x in requests)+'\n',text=True,capture_output=True,check=True,env=dict(os.environ,PYTHONPATH=str(ROOT/'src')))
         self.assertEqual([json.loads(x) for x in process.stdout.splitlines()],messages)
 
 

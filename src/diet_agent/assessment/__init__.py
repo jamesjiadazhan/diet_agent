@@ -92,7 +92,9 @@ def calculate_dietary_indices(nutrients,food_patterns,age):
             'total_protein':total(food_patterns,'pf_mps_total','pf_eggs','pf_nutsds','pf_soy','pf_legumes'),
             'seafood_plant_protein':total(food_patterns,'pf_seafd_hi','pf_seafd_low','pf_nutsds','pf_soy','pf_legumes'),
             'whole_grain':get(food_patterns,'g_whole'),'dairy':get(food_patterns,'d_total'),
-            'fatty_acid':None if sfa is None or sfa==0 or unsaturated is None else unsaturated/sfa,
+            # The frozen NHANES R wrapper explicitly assigns a ratio of zero
+            # for known zero saturated fat. Missing fat data still abstains.
+            'fatty_acid':None if sfa is None or unsaturated is None else 0.0 if sfa==0 else unsaturated/sfa,
             'refined_grain':get(food_patterns,'g_refined'),'sodium':get(nutrients,'sodium_mg'),
             'added_sugar':get(food_patterns,'add_sugars'),'saturated_fat':sfa}
     return hei2020(inputs)

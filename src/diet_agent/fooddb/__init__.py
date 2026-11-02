@@ -9,7 +9,8 @@ import sqlite3
 def default_path():
     if os.environ.get('DIET_AGENT_DB'):
         return Path(os.environ['DIET_AGENT_DB'])
-    name='generic-fndds-2021-2023-v1.sqlite'
+    from ..data_assets import manifest
+    name=manifest()['file'].removesuffix('.gz')
     local=Path(__file__).resolve().parents[3]/'data'/name
     return local if local.is_file() else Path.home()/'.cache/diet_agent'/name
 

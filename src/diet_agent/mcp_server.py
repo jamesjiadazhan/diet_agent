@@ -67,7 +67,7 @@ def serve(database=None,stdin=None,stdout=None):
                 if negotiated:raise ValueError('Already initialized')
                 version=params.get('protocolVersion')
                 negotiated=version if version in ['2024-11-05','2025-03-26','2025-06-18'] else '2025-06-18'
-                value={'protocolVersion':negotiated,'capabilities':{'tools':{'listChanged':False}},'serverInfo':{'name':'diet-agent','version':'0.1.0'}}
+                value={'protocolVersion':negotiated,'capabilities':{'tools':{'listChanged':False}},'serverInfo':{'name':'diet-agent','version':'0.1.1'}}
             elif method=='ping':value={}
             elif not initialized:raise ValueError('Initialize and send notifications/initialized first')
             elif method=='tools/list':value={'tools':tool_definitions()}

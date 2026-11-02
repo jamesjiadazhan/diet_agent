@@ -4,9 +4,9 @@ if(length(args)!=2)stop("Usage: Rscript scripts/extract_patterns.R workbook.xls 
 suppressPackageStartupMessages(library(readxl))
 sheets<-excel_sheets(args[[1]])
 if(!any(grepl("2123|2021.*2023",sheets)))stop("Workbook sheets do not identify FPED/FPID 2021-2023; refusing a mismatched release")
-for(sheet in sheets){
+for(sheet in sheets[grepl("2123|2021.*2023",sheets)]){
  d<-read_excel(args[[1]],sheet=sheet,.name_repair="unique")
- if(any(grepl("FOODCODE|FOOD_CODE|INGREDIENT_CODE",names(d),ignore.case=TRUE))){
+ if(any(grepl("^(FOODCODE|FOOD_CODE|INGREDIENT_CODE|CODE)$",names(d),ignore.case=TRUE))){
    write.csv(d,args[[2]],row.names=FALSE,na="");quit(status=0)
  }
 }

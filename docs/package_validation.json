@@ -1,0 +1,11 @@
+{
+  "package_version": "0.1.1",
+  "wheel_bytes": 22810,
+  "wheel_sha256": "0edebb01301f35f3d0dc469c09ae1afe23fc73349d3506adefaa7a9e73b2c17f",
+  "runtime_wheel_contains_database_or_fixtures": false,
+  "installed_cli_sample_status": "complete",
+  "sample_hei2020": 56.7032967032967,
+  "independent_rebuild_identical_compressed_sha256": "f7b89cbd6293c15116ad4d78921096b43c1aa3dc25f6947079c2fabe54a22b5d",
+  "data_v1_preserved": true,
+  "data_version": "generic-fndds-2021-2023-v2"
+}

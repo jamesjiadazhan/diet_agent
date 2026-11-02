@@ -13,13 +13,14 @@ from build_fooddb import NAMES,UNITS,checksum,patterns
 
 def validate():
     manifest=json.loads((ROOT/'data/manifest.json').read_text())
-    db=sqlite3.connect(ROOT/'data/generic-fndds-2021-2023-v1.sqlite')
+    db=sqlite3.connect(ROOT/'data'/manifest['file'].removesuffix('.gz'))
     db.row_factory=sqlite3.Row
     source=ROOT.parent/'USDA_food_central_data/FNDDS_10_2024.json'
     foods=json.loads(source.read_text())['SurveyFoods']
     byid={x['fdcId']:x for x in foods}
-    nutrient_checks=0;portion_checks=0;pattern_checks=0
+    nutrient_checks=0;portion_checks=0;pattern_checks=0;ingredient_checks=0
     fped,_=patterns(ROOT/'data_sources/FPED_2123.xls')
+    fpid,_=patterns(ROOT/'data_sources/FPID_2123.xls')
     for record in db.execute('SELECT * FROM foods ORDER BY id'):
         food=byid[record['fdc_id']]
         assert food['foodCode']==record['food_code']
@@ -37,6 +38,12 @@ def validate():
             expected=fped[record['food_code']]['values']
             actual={r['component']:(r['value'],r['unit']) for r in db.execute('SELECT * FROM pattern_values WHERE food_id=?',(record['id'],))}
             assert expected==actual;pattern_checks+=len(actual)
+    for record in db.execute('SELECT * FROM fpid_ingredients'):
+        expected=fpid[record['food_code']]
+        assert expected['description']==record['description']
+        actual={r['component']:(r['value'],r['unit']) for r in db.execute('SELECT * FROM ingredient_pattern_values WHERE food_code=?',(record['food_code'],))}
+        assert expected['values']==actual
+        ingredient_checks+=len(actual)
     with (ROOT/'data/source_tables/published_food_compass_scores.csv').open() as f:rows=list(csv.DictReader(f))
     published=defaultdict(list)
     for row in rows:published[row['food_code']].append(row)
@@ -52,10 +59,11 @@ def validate():
     assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
     assert not db.execute('PRAGMA foreign_key_check').fetchall()
     assert checksum(ROOT/'data'/manifest['file'])==manifest['sha256']
-    assert checksum(ROOT/'data/generic-fndds-2021-2023-v1.sqlite')==manifest['uncompressed_sha256']
+    assert checksum(ROOT/'data'/manifest['file'].removesuffix('.gz'))==manifest['uncompressed_sha256']
     assert manifest['foods']==5431
     result={'catalog_foods':5431,'source_nutrients_exactly_equal':nutrient_checks,
             'source_portions_exactly_equal':portion_checks,'source_pattern_values_exactly_equal':pattern_checks,
+            'source_ingredient_pattern_values_exactly_equal':ingredient_checks,
             'published_scores_exactly_verified':accepted,'precomputed_reference_values':5431,
             'integrity':'ok','foreign_keys':'ok','asset_checksums':'ok',
             'pattern_source_status':manifest['status'],'blockers':manifest['blockers']}

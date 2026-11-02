@@ -1,24 +1,28 @@
 {
   "commit": "0cb60bd67c2942d954d20637500c4a921a935f51",
   "component_and_total_comparisons": 14616,
-  "domain": "finite nonnegative inputs, age >=1, positive energy; missing inputs abstain; undefined ratios abstain",
+  "domain": "finite nonnegative inputs, age >=1, positive energy; missing inputs abstain; known zero saturated fat uses the R NHANES ratio convention of zero",
   "food_compass": "published exact lookup only; reconstruction is not enabled",
   "frozen_reference_and_fixture_sha256": {
     "reference/dietaryindex/CITATION": "ec20a388bc691dc01826984b54ea344fd67be163a51ba3e74b4768ad44c0de99",
     "reference/dietaryindex/DESCRIPTION.txt": "a3a33577c56cecb263597ea7a175fbc1617fe3661879fd0b0f743dcd79194054",
     "reference/dietaryindex/HEI2020.R": "44a7eb07e6bf35c9a3c306e53cef5266a16a96d2d1977ed66d08543aef670b17",
+    "reference/dietaryindex/HEI2020_NHANES_FPED.R": "33daec998ab0fb58bacc5d97226c0856951fe14c0e759d17e68fd7b124d39cdc",
     "reference/dietaryindex/HEI2020_V2.R": "e849a33262aa856ba181119d52f886c3905be2528583f61cbe4b4b7b44899fc0",
     "reference/dietaryindex/LICENSE.txt": "c0dabf1298ae5e4335857894c661972a90dd12cc04b0eb62cee7f2c045b2e182",
     "tests/fixtures/HEI2020_V2_VALIDATION.csv": "c60fe6bbb1e963e675b7a643646e1833de6f154d96379b17bfde832fc5bbd7aa",
     "tests/fixtures/HEI2020_V2_VALIDATION_r_output.csv": "51b0c8597241cc10837ec6940da5e855a1b8569875ef38900d4711eb5921f8f5",
     "tests/fixtures/HEI2020_VALIDATION.csv": "812a13afa0ce3ed5f3303bc9948a4d57aafee3ccb6ada22aa01ad22b7b778de8",
     "tests/fixtures/HEI2020_VALIDATION_r_output.csv": "debaa3780f631122f1d010b119e1082215bb1c5d0e36b6fbf32912f540ed0483",
+    "tests/fixtures/catalog_meal_inputs.json": "42cc01587dd805b90ed093c497fab11b23331a797cb31ca96114c30e97620f94",
+    "tests/fixtures/catalog_meal_r_output.csv": "66ecb5d489da232ace3416f4e21762c6a16a5c9b6c84c359332a3b9bb2ad63a0",
     "tests/fixtures/hei_random_inputs.csv": "9098ad231448282db3fc49e3d7588387c8707c1c0934d579c634c3f25948e07f",
     "tests/fixtures/hei_random_r_output.csv": "03be5d93473fab83f6c04db4a50fe92bce062d5aba9f0ebbadd386b967d64da7"
   },
   "functions": [
     "HEI2020",
-    "HEI2020_V2"
+    "HEI2020_V2",
+    "HEI2020_NHANES_FPED (known-zero-fat convention)"
   ],
   "maximum_absolute_error": 1.5631940186722204e-13,
   "not_ported": [
@@ -27,6 +31,16 @@
   "r_differential_cases": 1044,
   "reference_package": "dietaryindex",
   "result": "pass",
+  "source_to_score_validation": {
+    "cases": 5603,
+    "component_and_total_comparisons": 78442,
+    "individual_food_cases": 5403,
+    "maximum_absolute_error": 5.684341886080802e-14,
+    "mixed_meal_cases": 200
+  },
+  "test_count": 21,
   "tolerance": 1e-10,
+  "total_numeric_comparisons": 93058,
+  "total_r_cases": 6647,
   "version": "2.1"
 }

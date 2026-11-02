@@ -33,7 +33,7 @@ Example host configuration (adjust the installed executable path and database):
   "mcpServers": {
     "diet-agent": {
       "command": "/absolute/path/to/venv/bin/diet-assess",
-      "args": ["mcp", "--database", "/absolute/path/to/generic-fndds-2021-2023-v1.sqlite"]
+      "args": ["mcp", "--database", "/absolute/path/to/generic-fndds-2021-2023-v2.sqlite"]
     }
   }
 }

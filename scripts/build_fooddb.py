@@ -38,7 +38,7 @@ def patterns(path):
     with csv_path.open(encoding='utf-8-sig',newline='') as f:
         rows=list(csv.DictReader(f))
     if not rows:raise ValueError('Empty pattern source')
-    codekey=next((k for k in rows[0] if re.sub('[^A-Z]','',k.upper()) in ('FOODCODE','INGREDIENTCODE')),None)
+    codekey=next((k for k in rows[0] if re.sub('[^A-Z]','',k.upper()) in ('FOODCODE','INGREDIENTCODE','CODE')),None)
     if not codekey:raise ValueError('Pattern source lacks FOODCODE')
     header={}
     for key in rows[0]:
@@ -137,15 +137,15 @@ def build(args):
     with args.output.open('rb') as source,compressed.open('wb') as output:
         with gzip.GzipFile(filename='',mode='wb',fileobj=output,mtime=0) as z:
             for block in iter(lambda:source.read(1024*1024),b''):z.write(block)
-    manifest={'schema_version':1,'dataset_version':'generic-fndds-2021-2023-v1','file':compressed.name,
+    manifest={'schema_version':1,'dataset_version':'generic-fndds-2021-2023-v2','file':compressed.name,
               'url':'https://raw.githubusercontent.com/jamesjiadazhan/diet_agent/main/data/'+compressed.name,
               'sha256':checksum(compressed),'uncompressed_sha256':checksum(args.output),
               'bytes':compressed.stat().st_size,'uncompressed_bytes':args.output.stat().st_size,
               'foods':count,'fped_matched_foods':pattern_count,'fpid_ingredients':len(fpid),
               'compass_methods':dict(methods),'precomputed_reference_coverage':count,
               'excluded_source_records':excluded,'sources':source_manifest,
-              'status':'complete' if fped and fpid else 'partial',
-              'blockers':[] if fped and fpid else ['Matching FPED/FPID 2021-2023 source files unavailable; HEI from catalog intakes abstains']}
+              'status':'complete' if fped and fpid and pattern_count==count else 'partial',
+              'blockers':[] if fped and fpid and pattern_count==count else ['Matching FPED/FPID 2021-2023 source coverage is incomplete; HEI abstains for missing records']}
     for path in [ROOT/'data/manifest.json',ROOT/'src/diet_agent/asset_manifest.json']:
         path.write_text(json.dumps(manifest,indent=2,sort_keys=True)+'\n')
     print(json.dumps({k:v for k,v in manifest.items() if k!='sources'},indent=2))
@@ -158,6 +158,6 @@ if __name__=='__main__':
     p.add_argument('--fpid',type=Path,default=ROOT/'data_sources/FPID_2123.xls')
     p.add_argument('--precomputed',type=Path,default=ROOT/'data/source_tables/legacy_precomputed_scores.csv')
     p.add_argument('--published',type=Path,default=ROOT/'data/source_tables/published_food_compass_scores.csv')
-    p.add_argument('--output',type=Path,default=ROOT/'data/generic-fndds-2021-2023-v1.sqlite')
+    p.add_argument('--output',type=Path,default=ROOT/'data/generic-fndds-2021-2023-v2.sqlite')
     p.add_argument('--allow-missing-patterns',action='store_true')
     build(p.parse_args())
